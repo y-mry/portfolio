@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="モリヤユイのポートフォリオサイト">
+    <title>Yui Moriya Portfolio</title>
+    <!-- OGP -->
+    <meta property="og:title" content="hibi（ヒビ）" />
+    <meta property="og:description" content="やりたいことを後回しせず、始める一歩を軽くして今日の行動に変えていく、習慣化アプリ「hibi（ヒビ）」" />
+    <meta property="og:image" content="https://y-mry.github.io/hibi/img/ogp.png" />
+    <meta property="og:url" content="https://y-mry.github.io/hibi" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2abdc1e923.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+
+        <div class="spline-container">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.94/build/spline-viewer.js"></script>
+            <spline-viewer url="https://prod.spline.design/KfO40Y1aSO4VXR0o/scene.splinecode"></spline-viewer>
+        </div>
+
+        <div class="hero-content">
+            <header class="nav">
+                <a href="index.html">
+                    <div class="symbol"></div>
+                </a>
+
+                <button class="hamburger" id="js-hamburger">
+                    <div class="hamburger-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="hamburger-text">
+                        <span class="text-menu">menu</span>
+                        <span class="text-close">close</span>
+                    </div>
+                </button>
+
+                <div class="menu">
+                    <a class="underline" href="#">ABOUT</a>
+                    <a class="underline" href="#">CREATE</a>
+                    <a href="#"><img src="img/mail.svg" alt="" width="20px"></a>
+                </div>
+
+
+                <div class="sp-nav" id="js-sp-nav">
+                    <nav class="sp-nav-list">
+                        <a class="sp-underline" href="#">ABOUT</a>
+                        <a class="sp-underline" href="#">CREATE</a>
+                        <a href="#"><img src="img/mail.svg" alt="" width="20px"></a>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="main-title">
+                <img src="img/title1.svg" alt="" class="logo">
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+</body>
+
+
+<script>
+    const hamburger = document.getElementById('js-hamburger');
+    const spNav = document.getElementById('js-sp-nav'); // 追加
+
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('is-active');
+        spNav.classList.toggle('is-active'); // 追加
+    });
+</script>
+
+</html>

@@ -1,0 +1,304 @@
+@charset "utf-8";
+
+body {
+    font-family: 'Noto Sans JP', serif;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 1. 背景画像 */
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(270deg, #70e1f5, #ffd194);
+        background-size: 200% 200%;
+        animation: Grad 10s ease-in infinite;
+    }
+
+    /* 2. Spline 3D (背景とテキストの間) */
+    .spline-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    /* 3. テキスト・UI (最前面) */
+    .hero-content {
+        font-family: 'Open Sans', serif;
+        font-weight: 400;
+        font-size: 14px;
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        padding: 40px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+
+        @media (width <=600px) {
+            padding: 30px 30px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: auto;
+            /* ボタン類だけクリック可能に */
+
+            .symbol {
+                width: 40px;
+                height: 40px;
+                background-color: #fff;
+                /* 三角形の色 */
+                clip-path: polygon(0 0, 100% 0, 0 100%);
+            }
+
+            .menu {
+                a {
+                    color: #000;
+                    text-decoration: none;
+                    margin-left: 72px;
+                    letter-spacing: 0.1em;
+                }
+
+                .underline {
+                    position: relative;
+                    padding-bottom: 4px;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        height: 1px;
+                        background-color: #000;
+
+                        /* 最初はサイズ0、基点は右側 */
+                        transform: scaleX(0);
+                        transform-origin: right top;
+                        transition: transform 0.3s ease-in-out;
+                    }
+
+                    &:hover::after {
+                        /* ホバー時は基点を左側に変更して伸ばす */
+                        transform-origin: left top;
+                        transform: scaleX(1);
+                    }
+                }
+
+                .mail-icon {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        /* メインタイトル */
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            margin-bottom: 100px;
+            max-width: 500px;
+            z-index: 10;
+        }
+    }
+}
+
+@keyframes Grad {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+
+/* ==============================================================
+   ハンバーガーメニュー
+============================================================== */
+
+.hamburger,
+.sp-nav {
+    display: none;
+}
+
+@media (width <=600px) {
+    .menu {
+        display: none;
+    }
+
+    /* ハンバーガーボタンの基本スタイル */
+    .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        pointer-events: auto;
+        z-index: 10;
+
+        /* 3本線のコンテナ */
+        .hamburger-lines {
+            position: relative;
+            width: 40px;
+            height: 16px;
+
+            span {
+                position: absolute;
+                right: 0;
+                width: 100%;
+                height: 1px;
+                background-color: #fff;
+                transition: all 0.4s ease;
+
+                &:nth-child(1) {
+                    top: 0;
+                }
+
+                &:nth-child(2) {
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 70%;
+                }
+
+                &:nth-child(3) {
+                    bottom: 0;
+                    width: 40%;
+                }
+            }
+        }
+
+        /* テキスト部分 */
+        .hamburger-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: #fff;
+            position: relative;
+            height: 1.2em;
+            width: 100%;
+            text-align: center;
+
+            span {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                transition: opacity 0.4s;
+            }
+
+            .text-close {
+                opacity: 0;
+            }
+        }
+
+        /* --- アニメーション（Active時） --- */
+        &.is-active {
+            .hamburger-lines {
+                span:nth-child(1) {
+                    top: 50%;
+                    transform: translateY(-50%) rotate(30deg);
+                }
+
+                span:nth-child(2) {
+                    opacity: 0;
+                    transform: translate(-20px, -50%);
+                }
+
+                span:nth-child(3) {
+                    width: 100%;
+                    bottom: 50%;
+                    transform: translateY(50%) rotate(-30deg);
+                }
+            }
+
+            .hamburger-text {
+                .text-menu {
+                    opacity: 0;
+                }
+
+                .text-close {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    /* SPメニューのコンテナ */
+    .sp-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #CBD7B7;
+        z-index: 5;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.8s ease, visibility 0.8s;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+
+        &.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+
+            .sp-nav-list a {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* メニューリストの縦並び設定 */
+        .sp-nav-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+            margin-top: 30vh;
+
+            a {
+                color: #000;
+                text-decoration: none;
+                font-size: 20px;
+                letter-spacing: 0.1em;
+                opacity: 0;
+                transition: all 0.6s;
+
+                &.sp-underline {
+                    border-bottom: solid 1px #000;
+                }
+            }
+
+            .fa-envelope {
+                font-size: 24px;
+            }
+        }
+    }
+}
